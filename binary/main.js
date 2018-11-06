@@ -6,32 +6,58 @@ function sum1s(N) {
   const carry = Math.trunc(N / 2);
   return { result, carry };
 }
-
-function equalStrings(string1, string2) {
-  //Adicionar 0 até as strings ficarem de tamanho igual
-  string2 = string2.padStart(string1.length, "0");
-  string1 = string1.padStart(string2.length, "0");
-  return { string1, string2 };
+//Crescente pelo tamanho da string
+function sort(a, b) {
+  return b.length - a.length;
 }
-function sumBinary(num1, num2) {
+function equalStrings(nums) {
+  //Converter o array de numeros para strings
+  let strings = nums.map(num => String(num));
+  strings.sort(sort);
+  //Adicionar 0 até as strings ficarem de tamanho igual
+  strings = strings.map(string => string.padStart(strings[0].length, "0"))
+  return strings;
+}
+//Gerar Strings para multiplicar
+function generateStrings(num1, num2) {
+  const strings = [];
+  //Reverter a string que vai multiplicar
+  num1 = num1.split("")
+    .reverse()
+    .join("");
+  //Percorrer o numero 1(O que vai multiplicar)
+  for (let index = 0; index < num1.length; index++) {
+    const element = num1.charAt(index);
+    //Se for 1 devemos criar uma nova string com 0s no fim
+    if (element === "1") {
+      const newString = num2.padEnd(num2.length + index, "0");
+      strings.push(newString);
+    }
+  }
+  return strings;
+}
+//Multiplicar 2 numeros binários
+function productBinary(num1, num2) {
+  const strings = generateStrings(String(num1), String(num2));
+  return sumBinary(strings);
+}
+
+function sumBinary(nums) {
   //Igualar o tamanho das strings para facilitar os calculos
-  const { string1, string2 } = equalStrings(String(num1), String(num2));
+  const strings = equalStrings(nums);
   //Começar os numeros "carregados" em 0
   let outerCarry = 0;
   //Inicializar String de resultado
   let resultFinal = "";
   //Loop ao contrario devido a natureza da soma
-  for (let index = string1.length - 1; index >= 0; index--) {
+  for (let index = strings[0].length - 1; index >= 0; index--) {
     let N = 0;
-    const char1 = string1.charAt(index);
-    const char2 = string2.charAt(index);
-    //Contar Numeros de 1
-    if (char1 === "1") {
-      N++;
-    }
-    if (char2 === "1") {
-      N++;
-    }
+    //Contar 1s naquela posição
+    strings.forEach(string => {
+      if (string.charAt(index) === "1") {
+        N++;
+      }
+    });
     const { result, carry } = sum1s(N + outerCarry);
     resultFinal = resultFinal + result;
     outerCarry = carry;
@@ -87,10 +113,14 @@ function input1Change() {
   const value = input1Doc.value;
   input1BinValue = decimalToBin(value);
   input1Bin.value = input1BinValue;
-  sumBin = sumBinary(input1BinValue, input2BinValue);
+  sumBin = sumBinary([input1BinValue, input2BinValue]);
   sumBinDoc.value = sumBin;
   sum = binToDecimal(sumBin);
   sumDoc.value = sum;
+  productBin = productBinary(input1BinValue, input2BinValue);
+  productBinDoc.value = productBin;
+  product = binToDecimal(productBin);
+  productDoc.value = product;
 }
 // -------------
 let input2Doc = document.getElementById("input2");
@@ -101,8 +131,12 @@ function input2Change() {
   const value = input2Doc.value;
   input2BinValue = decimalToBin(value);
   input2Bin.value = input2BinValue;
-  sumBin = sumBinary(input1BinValue, input2BinValue);
+  sumBin = sumBinary([input1BinValue, input2BinValue]);
   sumBinDoc.value = sumBin;
   sum = binToDecimal(sumBin);
   sumDoc.value = sum;
+  productBin = productBinary(input1BinValue, input2BinValue);
+  productBinDoc.value = productBin;
+  product = binToDecimal(productBin);
+  productDoc.value = product;
 }
