@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Algoritmos de ordenação</title>
+    <title>Algoritmos de Primos e Perfeitos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="main.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
-
+    <div class="container">
+        <h1>Calculadora de Horas de série</h1>
+        <div class="row">
+            <p class="col s5"> Digite a duração do episodio(em horas)</p>
+            <input class="col s3" type="text" name="input" id="episodio" label="Num 1" oninput="onEpisodioChange()">
+            <p class="col s5"> Digite a quantidade do episodios</p>
+            <input class="col s3" type="text" name="input" id="qtd" label="Num 1" oninput="onQtdChange()">
+            
+        </div>
+        <p > Resultado</p>
+        <input class="col s3" type="text" name="input" id="resultado" label="Num 1" disabled>
+        <h1>Calculadora de soma de dias da semana</h1>
+        <h4>domingo,segunda,terça,quarta,quinta,sexta,sabado</h1>
+        <div class="row">
+            <p class="col s5"> Primeiro Dia</p>
+            <input class="col s3" type="text" name="input" id="dia1" label="Num 1" oninput="onDia1Change()">
+            <p class="col s5"> Segundo dia</p>
+            <input class="col s3" type="text" name="input" id="dia2" label="Num 1" oninput="onDia2Change()">
+        </div>
+        <p > Resultado</p>
+        <input class="col s3" type="text" name="input" id="resultadoDia" label="Num 1" disabled>
+    </div>
 </body>
+<script src="main.js"></script>
 
 </html>
