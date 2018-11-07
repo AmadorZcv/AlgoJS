@@ -12,13 +12,35 @@ function checkDivisores(num) {
 function isPerfeito(divisores, num) {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     const soma = divisores.reduce(reducer);
-    console.log("Soma é", soma);
-    console.log("Num é", num);
     if (soma + 1 == num) {
         return true;
     }
     return false;
 }
+function calculatePosição(hash, value, increment) {
+    if (hash.some(element => element === null)) {
+        const tamanho = hash.length;
+        const newValue = parseInt(value) + increment;
+        let posiçãoNew = newValue % tamanho;
+        if (hash[posiçãoNew] === null) {
+            const newHash = hash;
+            newHash[posiçãoNew] = value;
+            return newHash;
+        } else {
+            increment++;
+            return calculatePosição(hash, value, increment);
+        }
+    }
+    return hash;
+}
+function buildHash(hash, values) {
+    let newHash = hash.map(element => null);
+    values.forEach(element => {
+        newHash = calculatePosição(newHash, element, 0);
+    });
+    return newHash;
+}
+let hashArray = [];
 //Valores dos inputs base
 let input1 = 0;
 let input2 = 0;
@@ -26,19 +48,20 @@ let input2 = 0;
 let input1BinValue = 0;
 let input2BinValue = 0;
 //Valor da soma e do produto
-let sum = "Não";
-let product = "Não";
+let sum = "";
+let product = "";
 //Documentos do input1
 let input1Doc = document.getElementById("input1");
 input1Doc.value = input1;
+let hashSizeDoc = document.getElementById("hashSize");
+let hashResultDoc = document.getElementById("hash");
 //Doc das somas e da multiplicações
 let sumDoc = document.getElementById("sum");
-sum.value = sum;
 let productDoc = document.getElementById("product");
-product.value = product;
 //Função que lida com o input do usuario e realiza os calculos a cada mudança
 function input1Change() {
     const values = input1Doc.value.split(",");
+    hashResultDoc.value = buildHash(hashArray, values);
     const primos = [];
     const perfeitos = [];
     values.forEach(value => {
@@ -53,35 +76,12 @@ function input1Change() {
     });
     sumDoc.value = primos.join(", ");
     productDoc.value = perfeitos.join(", ")
-    /* const divisores = checkDivisores(value);
-    console.log("Divisores é",divisores)
-    if (divisores.length===0) {
-        sumDoc.value="Sim"
-        productDoc.value="Não"
-    }else{
-        sumDoc.value="Não"
-        if (isPerfeito(divisores,value)) {
-            productDoc.value="Sim";
-        }else{
-            productDoc.value="Não"
-        }
-    } */
 }
-/*   // -------------
-  let input2Doc = document.getElementById("input2");
-  input2Doc.value = input2;
-  let input2Bin = document.getElementById("input2Bin");
-  input2Bin.value = input2BinValue;
-  function input2Change() {
-    const value = input2Doc.value;
-    input2BinValue = decimalToBin(value);
-    input2Bin.value = input2BinValue;
-    sumBin = sumBinary([input1BinValue, input2BinValue]);
-    sumBinDoc.value = sumBin;
-    sum = binToDecimal(sumBin);
-    sumDoc.value = sum;
-    productBin = productBinary(input1BinValue, input2BinValue);
-    productBinDoc.value = productBin;
-    product = binToDecimal(productBin);
-    productDoc.value = product;
-  } */
+
+function hashSizeChange() {
+    hashArray = [];
+    for (let index = 0; index < hashSizeDoc.value; index++) {
+        hashArray[index] = null;
+    }
+}
+

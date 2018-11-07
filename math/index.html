@@ -15,7 +15,11 @@
 
 <body>
     <div class="container">
-        <h1>Calculadora de Primos e Perfeitos</h1>
+        <h1>Primos,Perfeitos e Tabela Hash</h1>
+        <div class="row">
+            <p> Digite o Tamanho da tabela</p>
+            <input class="col s4" type="text" name="input" id="hashSize" label="Num 1" oninput="hashSizeChange()">
+        </div>
         <div class="row">
             <p> Digite os numeros separados por virgula</p>
             <input class="col s4" type="text" name="input" id="input1" label="Num 1" oninput="input1Change()">
@@ -28,7 +32,10 @@
             <p>Perfeitos:</p>
             <input class="col s12" type="text" name="input" id="product" disabled>
         </div>
-
+        <div class="row col s6">
+            <p>Hash:</p>
+            <input class="col s12" type="text" name="hashResult" id="hash" disabled>
+        </div>
     </div>
 </body>
 <script src="main.js"></script>
