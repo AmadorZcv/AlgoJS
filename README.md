@@ -6,7 +6,15 @@ Algoritmos em JS para exercicios,aulas e uso pessoal
 * Binário para Decimal
 * Somar Binários
 * Multiplicar Binários
-* Dividir Binários
+
+# Math
+* Primos
+* Perfeitos
+* Tabela Hash
+
+# Time
+* Soma de dias da semana
+* Calculador de horas de série
 
 
 
