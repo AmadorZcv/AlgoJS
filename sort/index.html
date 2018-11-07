@@ -1,39 +1,43 @@
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Algoritmos de Primos e Perfeitos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!DOCTYPE HTML>
+<html>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<head>
+    <script>
+        window.onload = function () {
+            let values = [
+
+            ]
+            for (let index = 0; index < 100; index++) {
+                values.push({ y: Math.random() * (100 - 0) + 0, label: `${index}` })
+
+            }
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title: {
+                    text: "Numeros"
+                },
+                axisY: {
+                    title: "Reserves(MMbbl)"
+                },
+                data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendMarkerColor: "grey",
+                    legendText: "MMbbl = one million barrels",
+                    dataPoints: values
+                }]
+            });
+            chart.render();
+        }
+    </script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Calculadora de Horas de série</h1>
-        <div class="row">
-            <p class="col s5"> Digite a duração do episodio(em horas)</p>
-            <input class="col s3" type="text" name="input" id="episodio" label="Num 1" oninput="onEpisodioChange()">
-            <p class="col s5"> Digite a quantidade do episodios</p>
-            <input class="col s3" type="text" name="input" id="qtd" label="Num 1" oninput="onQtdChange()">
-            
-        </div>
-        <p > Resultado</p>
-        <input class="col s3" type="text" name="input" id="resultado" label="Num 1" disabled>
-        <h1>Calculadora de soma de dias da semana</h1>
-        <h4>domingo,segunda,terça,quarta,quinta,sexta,sabado</h1>
-        <div class="row">
-            <p class="col s5"> Primeiro Dia</p>
-            <input class="col s3" type="text" name="input" id="dia1" label="Num 1" oninput="onDia1Change()">
-            <p class="col s5"> Segundo dia</p>
-            <input class="col s3" type="text" name="input" id="dia2" label="Num 1" oninput="onDia2Change()">
-        </div>
-        <p > Resultado</p>
-        <input class="col s3" type="text" name="input" id="resultadoDia" label="Num 1" disabled>
-    </div>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <button onclick="onPress()">Ordenar</button>
+    <h1>Foi escolhido o quick sort por sua eficiencia</h1>
 </body>
-<script src="main.js"></script>
-
+<script src="./index.js"></script>
 </html>
